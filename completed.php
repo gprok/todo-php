@@ -1,29 +1,33 @@
 <?php
 require_once('database.php');
-require_once ('page_head.php');
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
 
-<div class="jumbotron">
-    <h1 class="display-4">Completed Tasks</h1>
-    <hr class="my-4">
+<div>
+    <h1>Completed Tasks</h1>
+    <hr>
+    <a href="index.php">Tasks</a>
+    <hr>
 </div>
-<div class="row">
-
-    <ul class="list-group">
-        <div class="col-sm">
-            <?php
-            $sql = "SELECT * FROM tasks WHERE completed=1";
-            $result = $conn->query($sql, PDO::FETCH_ASSOC);
-            foreach($result as $row){
-                echo  "<li class='list-group-item'>" . $row['name'] .
-                    " <a href='undo.php?id=" . $row['id'] . "'><i class='fas fa-undo-alt'></i></a> 
-                      <a href='delete.php?id=" . $row['id'] . "'><i class='far fa-trash-alt'></i></a></li>";
-            }
-            ?>
-        </div>
+<div>
+    <ul>
+        <?php
+        $sql = "SELECT * FROM tasks WHERE completed=1";
+        $result = $conn->query($sql, PDO::FETCH_ASSOC);
+        foreach($result as $row){
+            echo  "<li>" . $row['name'] .
+                " <a href='undo.php?id=" . $row['id'] . "'>undo</a> 
+                  <a href='delete.php?id=" . $row['id'] . "'>delete</a></li>";
+        }
+        ?>
     </ul>
 </div>
 
-<?php
-require_once ("page_footer.php");
-?>
+</body>
+</html>
